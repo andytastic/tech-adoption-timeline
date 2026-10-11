@@ -68,7 +68,9 @@
       "title": "Wright Flyer",
       "why": "The first sustained, controlled, powered flight, in December 1903, started the age of aviation.",
       "source": "https://en.wikipedia.org/wiki/Wright_Flyer",
+	"adoption series": "Aviation"
     },
+
     {
       "id": "commercial-radio",
       "year": 1920,
