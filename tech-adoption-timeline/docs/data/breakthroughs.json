@@ -1,0 +1,104 @@
+{
+  "breakthroughs": [
+    {
+      "id": "movable-type",
+      "year": 1040,
+      "approx": true,
+      "title": "Movable type (China)",
+      "why": "Bi Sheng's reusable ceramic characters showed that a page could be assembled from interchangeable pieces instead of carved as one block.",
+      "source": "https://en.wikipedia.org/wiki/Movable_type"
+    },
+    {
+      "id": "mechanical-clock",
+      "year": 1275,
+      "approx": true,
+      "title": "Mechanical clock escapement",
+      "why": "The verge-and-foliot escapement made purely mechanical clocks possible. In the 1370s alone, more than 70 European cities added public clocks.",
+      "source": "https://en.wikipedia.org/wiki/History_of_timekeeping_devices"
+    },
+    {
+      "id": "printing-press",
+      "year": 1440,
+      "approx": true,
+      "title": "Printing press (Europe)",
+      "why": "Gutenberg's metal-type press made books something that could be produced in volume. By 1500, Western Europe's presses had printed over 20 million copies.",
+      "source": "https://en.wikipedia.org/wiki/Printing_press"
+    },
+    {
+      "id": "steam-engine",
+      "year": 1712,
+      "title": "Steam engine",
+      "why": "Newcomen's engine near Dudley Castle was the first practical steam engine. It drained mines and gave industry power that did not depend on wind, water or animals.",
+      "source": "https://collection.sciencemuseumgroup.org.uk/objects/co50900/newcomen-atmospheric-engine-atmospheric-steam-engine"
+    },
+    {
+      "id": "telephone",
+      "year": 1876,
+      "title": "Telephone",
+      "why": "Bell's patent, issued in March 1876, covered sending speech over wire. The telephone did not become commercially viable until about 1878.",
+      "source": "https://www.historyofinformation.com/detail.php?id=507",
+      "adoption_series": "landline"
+    },
+    {
+      "id": "central-power-station",
+      "year": 1882,
+      "title": "Central electric power station",
+      "why": "Edison's Pearl Street Station began supplying electricity to customers in Manhattan in September 1882, the forerunner of the central power station.",
+      "source": "https://ethw.org/Milestones:Pearl_Street_Station,_1882",
+      "adoption_series": "electric-power"
+    },
+    {
+      "id": "commercial-radio",
+      "year": 1920,
+      "title": "Commercial radio broadcasting",
+      "why": "KDKA's first scheduled broadcast aired the 1920 election returns. Within four years the US had 600 commercial radio stations.",
+      "source": "https://www.fcc.gov/news-events/blog/2020/11/02/celebrating-100-years-commercial-radio",
+      "adoption_series": "radio"
+    },
+    {
+      "id": "penicillin",
+      "year": 1928,
+      "title": "Penicillin",
+      "why": "Fleming noticed a mold that stopped staphylococcus bacteria from growing. It took roughly another decade for its full medical significance to be recognized.",
+      "source": "https://www.sciencehistory.org/historical-profile/alexander-fleming"
+    },
+    {
+      "id": "transistor",
+      "year": 1947,
+      "title": "Transistor",
+      "why": "Bell Labs demonstrated the first transistor on December 23, 1947, a solid-state alternative to the unreliable vacuum tubes of the time.",
+      "source": "https://www.computerhistory.org/siliconengine/invention-of-the-point-contact-transistor/"
+    },
+    {
+      "id": "arpanet",
+      "year": 1969,
+      "title": "ARPANET",
+      "why": "The first message crossed the ARPANET, forerunner of the modern internet, on October 29, 1969. The system crashed after two letters.",
+      "source": "https://www.history.com/this-day-in-history/October-29/first-electronic-message-sent-arpanet-internet-precursor"
+    },
+    {
+      "id": "world-wide-web",
+      "year": 1991,
+      "title": "World Wide Web",
+      "why": "Tim Berners-Lee opened the Web to the public in 1991. CERN's choice to make it completely open let it spread freely.",
+      "source": "https://thenextweb.com/news/20-years-ago-today-the-world-wide-web-opened-to-the-public",
+      "adoption_series": "internet"
+    },
+    {
+      "id": "iphone",
+      "year": 2007,
+      "title": "iPhone",
+      "why": "Apple announced the iPhone in January 2007 and began US sales in June. A software kit for outside developers followed in March 2008.",
+      "source": "https://en.wikipedia.org/wiki/IPhone_(1st_generation)",
+      "adoption_series": "smartphone"
+    },
+    {
+      "id": "chatgpt",
+      "year": 2022,
+      "title": "ChatGPT",
+      "why": "OpenAI released ChatGPT as a free research preview on November 30, 2022. By January 2023 it had reportedly passed 100 million users.",
+      "source": "https://en.wikipedia.org/wiki/ChatGPT",
+      "adoption_series": "generative-ai"
+    }
+  ]
+}

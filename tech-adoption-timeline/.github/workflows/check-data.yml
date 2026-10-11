@@ -1,0 +1,19 @@
+# This runs the data check on every pull request, and on every push to main.
+# You'll see the result as a green check or red X on the pull request page.
+name: Check data
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate data files
+        run: python scripts/validate_data.py

@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Breakthroughs and Adoption</title>
+<meta name="description" content="A thousand years of technological breakthroughs, and how fast the modern ones spread. Where generative AI sits on that curve.">
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7;
+    --surface: #fcfcfb;
+    --ink: #0b0b0b;
+    --ink-2: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --axis: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --accent: #2a78d6;
+    --s-generative-ai: #2a78d6;
+    --s-landline: #eb6834;
+    --s-electric-power: #1baf7a;
+    --s-radio: #eda100;
+    --s-internet: #e87ba4;
+    --s-smartphone: #008300;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --page: #0d0d0d;
+      --surface: #1a1a19;
+      --ink: #f0efec;
+      --ink-2: #c3c2b7;
+      --muted: #898781;
+      --grid: #2c2c2a;
+      --axis: #383835;
+      --border: rgba(255,255,255,0.10);
+      --accent: #3987e5;
+      --s-generative-ai: #3987e5;
+      --s-landline: #d95926;
+      --s-electric-power: #199e70;
+      --s-radio: #c98500;
+      --s-internet: #d55181;
+      --s-smartphone: #008300;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7;
+    --muted: #898781; --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+    --accent: #3987e5;
+    --s-generative-ai: #3987e5; --s-landline: #d95926; --s-electric-power: #199e70;
+    --s-radio: #c98500; --s-internet: #d55181; --s-smartphone: #008300;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--ink);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 48px 16px 64px; }
+  .eyebrow { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+  h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 16px; max-width: 18ch; }
+  .dek { font-size: 19px; color: var(--ink-2); max-width: 60ch; margin: 0; }
+  h2 { font-size: 22px; letter-spacing: -0.01em; margin: 0 0 6px; }
+  .sub { color: var(--ink-2); margin: 0 0 20px; max-width: 64ch; }
+  section { margin-top: 56px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+
+  /* Hero stat */
+  .hero { display: grid; grid-template-columns: auto 1fr; gap: 8px 24px; align-items: center; margin-top: 36px; }
+  .hero-num { font-size: clamp(56px, 11vw, 92px); font-weight: 700; line-height: 1; letter-spacing: -0.03em; }
+  .hero-text { font-size: 17px; color: var(--ink-2); max-width: 46ch; }
+  .hero-text strong { color: var(--ink); }
+  .hero-note { grid-column: 1 / -1; font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+  @media (max-width: 560px) { .hero { grid-template-columns: 1fr; } }
+
+  /* Timeline strip */
+  .strip { position: relative; height: 64px; margin: 4px 8px 8px; }
+  .strip-axis { position: absolute; left: 0; right: 0; top: 30px; height: 1px; background: var(--axis); }
+  .strip-dot { position: absolute; top: 24px; width: 13px; height: 13px; margin-left: -6.5px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--surface); cursor: pointer; padding: 0; }
+  .strip-dot:hover, .strip-dot:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+  .strip-tick { position: absolute; top: 44px; font-size: 12px; color: var(--muted); transform: translateX(-50%);
+    font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .strip-caption { font-size: 13px; color: var(--muted); margin: 0; }
+
+  .events { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .event { background: var(--surface); padding: 14px 18px; display: grid; grid-template-columns: 76px 1fr; gap: 4px 16px; }
+  .event:target, .event.flash { background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+  .event-year { font-weight: 700; font-variant-numeric: tabular-nums; color: var(--ink); }
+  .event-title { font-weight: 600; }
+  .event-why { grid-column: 2; color: var(--ink-2); font-size: 15px; margin: 0; }
+  .event-src { grid-column: 2; font-size: 13px; }
+  .event-src a, footer a, .method a { color: var(--ink-2); }
+
+  /* Chart */
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
+  .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .seg button { font: inherit; font-size: 14px; border: 0; background: transparent; color: var(--ink-2); padding: 7px 12px; cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0 0 8px; padding: 0; list-style: none; font-size: 14px; color: var(--ink-2); }
+  .legend li { display: inline-flex; align-items: center; gap: 6px; }
+  .legend .key { width: 16px; height: 2px; border-radius: 1px; display: inline-block; }
+  .legend .key.thick { height: 3px; }
+  .chart { position: relative; }
+  .chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .tick-label { fill: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .axis-title { fill: var(--muted); font-size: 12px; }
+  .tooltip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 10px; font-size: 13px; box-shadow: 0 4px 16px rgba(0,0,0,.12); min-width: 170px;
+    opacity: 0; transition: opacity .1s; z-index: 2; }
+  .tooltip.on { opacity: 1; }
+  .tooltip .tt-head { color: var(--muted); margin-bottom: 4px; }
+  .tooltip .tt-row { display: grid; grid-template-columns: 14px auto 1fr; gap: 8px; align-items: center; }
+  .tooltip .tt-row b { font-variant-numeric: tabular-nums; color: var(--ink); }
+  .tooltip .tt-row span:last-child { color: var(--ink-2); }
+  .tooltip .tt-key { width: 14px; height: 2px; border-radius: 1px; }
+  details { margin-top: 16px; }
+  summary { cursor: pointer; color: var(--ink-2); font-size: 14px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; margin-top: 10px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--grid); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .table-scroll { overflow-x: auto; }
+
+  .method { font-size: 14px; color: var(--ink-2); }
+  .method p { margin: 0 0 10px; max-width: 70ch; }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--grid); font-size: 13px; color: var(--muted); }
+  footer p { margin: 0 0 6px; }
+  .error { color: var(--ink-2); background: var(--surface); border: 1px dashed var(--axis); padding: 16px; border-radius: 8px; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <p class="eyebrow">1040 → 2026</p>
+  <h1>A thousand years of breakthroughs, and how fast they spread</h1>
+  <p class="dek">Big inventions used to take generations to reach most people. Each wave has moved faster than the last. This page puts generative AI on that curve.</p>
+
+  <div class="hero" id="hero" hidden>
+    <div class="hero-num" id="hero-num"></div>
+    <div class="hero-text" id="hero-text"></div>
+    <p class="hero-note">Not a like-for-like comparison: the older figures count households that own a technology, and this one counts adults who use AI at all. See method notes below.</p>
+  </div>
+
+  <section aria-labelledby="t-timeline">
+    <h2 id="t-timeline">The breakthroughs</h2>
+    <p class="sub">Each dot is one breakthrough, placed on a 1,000-year line. They crowd together at the right-hand end.</p>
+    <div class="card">
+      <div class="strip" id="strip" role="list" aria-label="Breakthroughs on a timeline from 1000 to today"></div>
+      <p class="strip-caption">Select a dot to jump to its entry.</p>
+    </div>
+    <ol class="events" id="events"></ol>
+  </section>
+
+  <section aria-labelledby="t-adoption">
+    <h2 id="t-adoption">How fast they spread</h2>
+    <p class="sub">Share of the US reached by each technology. Count from each launch year to compare speed, or switch to calendar years to see the eras.</p>
+    <div class="card">
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Horizontal axis">
+          <button type="button" data-mode="since" aria-pressed="true">Years since launch</button>
+          <button type="button" data-mode="calendar" aria-pressed="false">Calendar year</button>
+        </div>
+      </div>
+      <ul class="legend" id="legend"></ul>
+      <div class="chart" id="chart">
+        <div class="tooltip" id="tooltip" role="status" aria-live="polite"></div>
+      </div>
+      <details>
+        <summary>Show the data as a table</summary>
+        <div class="table-scroll" id="table"></div>
+      </details>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-method" class="method">
+    <h2 id="t-method">Method notes</h2>
+    <p id="method-notes"></p>
+    <p>"Launch" uses the breakthrough dates listed above: telephone 1876, central power 1882, commercial radio 1920, public Web 1991, iPhone mid-2007, ChatGPT late 2022. Pick different launch dates and the curves shift.</p>
+    <p>The generative AI survey counts anyone who uses it at all. That is a lower bar than having a phone line or electricity wired into the house. Read the gap between the curves as a sense of the trend, not a precise measurement.</p>
+  </section>
+
+  <footer>
+    <p>Data: <a href="https://ourworldindata.org/technology-adoption">Our World in Data, Technology Adoption</a> · <a href="https://fred.stlouisfed.org/series/RPSGENAIUSAGESHAREALL">Bick, Blandin &amp; Deming, Real-Time Population Survey, via FRED</a> · each breakthrough links to its own source.</p>
+    <p>Built in the open on GitHub. To suggest a breakthrough, open an issue in this repository.</p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var START = 1000;
+  var NOW = 2026;
+
+  function el(tag, attrs, text) {
+    var n = document.createElement(tag);
+    if (attrs) for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function svgEl(tag, attrs) {
+    var n = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    if (attrs) for (var k in attrs) n.setAttribute(k, attrs[k]);
+    return n;
+  }
+  function fmtYear(y) { return String(Math.floor(y)); }
+  function fmtPct(p) { return (Math.round(p * 10) / 10).toString() + "%"; }
+
+  Promise.all([
+    fetch("data/breakthroughs.json").then(function (r) { if (!r.ok) throw r; return r.json(); }),
+    fetch("data/adoption.json").then(function (r) { if (!r.ok) throw r; return r.json(); })
+  ]).then(function (res) {
+    renderHero(res[1]);
+    renderTimeline(res[0].breakthroughs);
+    renderAdoption(res[1]);
+    document.getElementById("method-notes").textContent = res[1].notes;
+  }).catch(function () {
+    var box = el("div", { class: "error" },
+      "The data files couldn't load. If you opened this file straight from your computer, browsers block that. View it on GitHub Pages, or run `python3 -m http.server` in the docs folder and visit http://localhost:8000.");
+    document.querySelector(".wrap").insertBefore(box, document.getElementById("hero"));
+  });
+
+  // ---------- Hero ----------
+  function renderHero(adoption) {
+    var ai = adoption.series.filter(function (s) { return s.id === "generative-ai"; })[0];
+    if (!ai) return;
+    var last = ai.points[ai.points.length - 1];
+    var yearsIn = (last.year - ai.launch_year).toFixed(1);
+    var q = Math.round((last.year % 1) * 4) + 1;
+    document.getElementById("hero-num").textContent = Math.round(last.pct) + "%";
+    var t = document.getElementById("hero-text");
+    t.textContent = "";
+    t.appendChild(document.createTextNode("of US adults aged 18–64 were using generative AI by "));
+    t.appendChild(el("strong", null, "Q" + q + " " + Math.floor(last.year)));
+    t.appendChild(document.createTextNode(", about " + yearsIn + " years after ChatGPT launched. For comparison, US household internet passed 50% in 2002, 11 years after the Web opened to the public."));
+    document.getElementById("hero").hidden = false;
+  }
+
+  // ---------- Timeline ----------
+  function renderTimeline(items) {
+    items = items.slice().sort(function (a, b) { return a.year - b.year; });
+    var strip = document.getElementById("strip");
+    var list = document.getElementById("events");
+    var span = NOW - START;
+
+    [1000, 1250, 1500, 1750, 2000].forEach(function (y) {
+      var t = el("span", { class: "strip-tick" }, String(y));
+      t.style.left = ((y - START) / span * 100) + "%";
+      strip.appendChild(t);
+    });
+    strip.appendChild(el("div", { class: "strip-axis", "aria-hidden": "true" }));
+
+    items.forEach(function (b) {
+      var label = (b.approx ? "c. " : "") + b.year + ", " + b.title;
+      var dot = el("button", { class: "strip-dot", type: "button", role: "listitem", "aria-label": label, title: label });
+      dot.style.left = ((b.year - START) / span * 100) + "%";
+      dot.addEventListener("click", function () {
+        var target = document.getElementById("e-" + b.id);
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        target.classList.add("flash");
+        setTimeout(function () { target.classList.remove("flash"); }, 1600);
+      });
+      strip.appendChild(dot);
+
+      var li = el("li", { class: "event", id: "e-" + b.id });
+      li.appendChild(el("div", { class: "event-year" }, (b.approx ? "c. " : "") + b.year));
+      li.appendChild(el("div", { class: "event-title" }, b.title));
+      li.appendChild(el("p", { class: "event-why" }, b.why));
+      var src = el("div", { class: "event-src" });
+      var a = el("a", { href: b.source, rel: "noopener" }, "Source");
+      src.appendChild(a);
+      li.appendChild(src);
+      list.appendChild(li);
+    });
+  }
+
+  // ---------- Adoption chart ----------
+  function renderAdoption(data) {
+    var series = data.series;
+    var mode = "since";
+    var chart = document.getElementById("chart");
+    var tooltip = document.getElementById("tooltip");
+
+    // Legend (always present; identity never by color alone)
+    var legend = document.getElementById("legend");
+    series.forEach(function (s) {
+      var li = el("li");
+      var key = el("span", { class: "key" + (s.id === "generative-ai" ? " thick" : "") });
+      key.style.background = "var(--s-" + s.id + ")";
+      li.appendChild(key);
+      li.appendChild(document.createTextNode(s.label));
+      legend.appendChild(li);
+    });
+
+    // Table view
+    var table = el("table");
+    var thead = el("thead");
+    var hr = el("tr");
+    ["Technology", "Year", "Years since launch", "Share reached", "Measure"].forEach(function (h) { hr.appendChild(el("th", null, h)); });
+    thead.appendChild(hr); table.appendChild(thead);
+    var tbody = el("tbody");
+    series.forEach(function (s) {
+      s.points.forEach(function (p) {
+        var tr = el("tr");
+        tr.appendChild(el("td", null, s.label));
+        tr.appendChild(el("td", { class: "num" }, p.year % 1 ? (Math.floor(p.year) + " Q" + (Math.round((p.year % 1) * 4) + 1)) : String(p.year)));
+        tr.appendChild(el("td", { class: "num" }, (p.year - s.launch_year).toFixed(1)));
+        tr.appendChild(el("td", { class: "num" }, fmtPct(p.pct)));
+        tr.appendChild(el("td", null, s.measure));
+        tbody.appendChild(tr);
+      });
+    });
+    table.appendChild(tbody);
+    document.getElementById("table").appendChild(table);
+
+    function xOf(s, p) { return mode === "since" ? p.year - s.launch_year : p.year; }
+
+    function draw() {
+      var old = chart.querySelector("svg");
+      if (old) old.remove();
+      var W = Math.max(300, chart.clientWidth);
+      var H = Math.round(Math.min(420, Math.max(260, W * 0.55)));
+      var m = { t: 12, r: 12, b: 40, l: 40 };
+      var iw = W - m.l - m.r, ih = H - m.t - m.b;
+
+      var x0, x1, ticks;
+      if (mode === "since") { x0 = 0; x1 = 90; ticks = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]; }
+      else { x0 = 1900; x1 = 2026; ticks = [1900, 1920, 1940, 1960, 1980, 2000, 2020]; }
+      if (W < 480) ticks = ticks.filter(function (t, i) { return i % 2 === 0; });
+      var sx = function (v) { return m.l + (v - x0) / (x1 - x0) * iw; };
+      var sy = function (v) { return m.t + ih - v / 100 * ih; };
+
+      var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img",
+        "aria-label": "Line chart of US adoption share over time for six technologies. Full data is in the table below." });
+
+      // Grid + y labels
+      [0, 25, 50, 75, 100].forEach(function (v) {
+        svg.appendChild(svgEl("line", { x1: m.l, x2: m.l + iw, y1: sy(v), y2: sy(v),
+          stroke: v === 0 ? "var(--axis)" : "var(--grid)", "stroke-width": 1 }));
+        var t = svgEl("text", { x: m.l - 8, y: sy(v) + 4, "text-anchor": "end", class: "tick-label" });
+        t.textContent = v + "%"; svg.appendChild(t);
+      });
+      ticks.forEach(function (v) {
+        var t = svgEl("text", { x: sx(v), y: m.t + ih + 18, "text-anchor": "middle", class: "tick-label" });
+        t.textContent = String(v); svg.appendChild(t);
+      });
+      var at = svgEl("text", { x: m.l + iw, y: H - 4, "text-anchor": "end", class: "axis-title" });
+      at.textContent = mode === "since" ? "Years since launch →" : "Year →";
+      svg.appendChild(at);
+
+      // Lines (generative AI drawn last, on top)
+      var order = series.slice().sort(function (a, b) { return (a.id === "generative-ai") - (b.id === "generative-ai"); });
+      order.forEach(function (s) {
+        var pts = s.points.filter(function (p) { var x = xOf(s, p); return x >= x0 && x <= x1; });
+        if (!pts.length) return;
+        var d = pts.map(function (p, i) { return (i ? "L" : "M") + sx(xOf(s, p)).toFixed(1) + "," + sy(p.pct).toFixed(1); }).join("");
+        var hero = s.id === "generative-ai";
+        svg.appendChild(svgEl("path", { d: d, fill: "none", stroke: "var(--surface)", "stroke-width": hero ? 6 : 5,
+          "stroke-linejoin": "round", "stroke-linecap": "round" }));
+        svg.appendChild(svgEl("path", { d: d, fill: "none", stroke: "var(--s-" + s.id + ")", "stroke-width": hero ? 3 : 2,
+          "stroke-linejoin": "round", "stroke-linecap": "round" }));
+        var lp = pts[pts.length - 1];
+        svg.appendChild(svgEl("circle", { cx: sx(xOf(s, lp)), cy: sy(lp.pct), r: hero ? 5 : 4,
+          fill: "var(--s-" + s.id + ")", stroke: "var(--surface)", "stroke-width": 2 }));
+      });
+
+      // Crosshair + hit layer
+      var cross = svgEl("line", { y1: m.t, y2: m.t + ih, stroke: "var(--muted)", "stroke-width": 1, opacity: 0 });
+      svg.appendChild(cross);
+      var hit = svgEl("rect", { x: m.l, y: m.t, width: iw, height: ih, fill: "transparent", tabindex: 0,
+        "aria-label": "Chart area. Use left and right arrow keys to move through years." });
+      svg.appendChild(hit);
+
+      var cursorX = null;
+      function show(xv) {
+        xv = Math.max(x0, Math.min(x1, xv));
+        cursorX = xv;
+        var px = sx(xv);
+        cross.setAttribute("x1", px); cross.setAttribute("x2", px); cross.setAttribute("opacity", 0.6);
+        tooltip.textContent = "";
+        tooltip.appendChild(el("div", { class: "tt-head" },
+          mode === "since" ? "Year " + Math.round(xv) + " after launch" : "Year " + Math.round(xv)));
+        var rows = 0;
+        series.forEach(function (s) {
+          var v = valueAt(s, xv);
+          if (v == null) return;
+          var row = el("div", { class: "tt-row" });
+          var k = el("span", { class: "tt-key" }); k.style.background = "var(--s-" + s.id + ")";
+          row.appendChild(k);
+          row.appendChild(el("b", null, (v.exact ? "" : "≈") + fmtPct(v.pct)));
+          row.appendChild(el("span", null, s.label + (mode === "since" ? " (" + fmtYear(v.year) + ")" : "")));
+          tooltip.appendChild(row); rows++;
+        });
+        if (!rows) tooltip.appendChild(el("div", null, "No data at this point"));
+        var scale = chart.clientWidth / W;
+        var left = px * scale + 14;
+        if (left + 220 > chart.clientWidth) left = px * scale - 14 - tooltip.offsetWidth;
+        tooltip.style.left = Math.max(0, left) + "px";
+        tooltip.style.top = (m.t * scale) + "px";
+        tooltip.classList.add("on");
+      }
+      function hide() { cross.setAttribute("opacity", 0); tooltip.classList.remove("on"); }
+
+      hit.addEventListener("pointermove", function (e) {
+        var r = svg.getBoundingClientRect();
+        var px = (e.clientX - r.left) * (W / r.width);
+        show(Math.round(x0 + (px - m.l) / iw * (x1 - x0)));
+      });
+      hit.addEventListener("pointerleave", hide);
+      hit.addEventListener("focus", function () { show(cursorX == null ? x0 + (x1 - x0) / 2 : cursorX); });
+      hit.addEventListener("blur", hide);
+      hit.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+          e.preventDefault();
+          show((cursorX == null ? x0 : cursorX) + (e.key === "ArrowRight" ? 1 : -1));
+        } else if (e.key === "Escape") { hide(); }
+      });
+
+      chart.insertBefore(svg, tooltip);
+    }
+
+    // Value at x: exact point if present, else straight-line between neighbors (marked ≈)
+    function valueAt(s, xv) {
+      var pts = s.points;
+      for (var i = 0; i < pts.length; i++) {
+        var xi = xOf(s, pts[i]);
+        if (Math.abs(xi - xv) < 0.13) return { pct: pts[i].pct, year: pts[i].year, exact: true };
+      }
+      for (var j = 0; j < pts.length - 1; j++) {
+        var a = xOf(s, pts[j]), b = xOf(s, pts[j + 1]);
+        if (xv > a && xv < b) {
+          var t = (xv - a) / (b - a);
+          return { pct: pts[j].pct + t * (pts[j + 1].pct - pts[j].pct),
+                   year: pts[j].year + t * (pts[j + 1].year - pts[j].year), exact: false };
+        }
+      }
+      return null;
+    }
+
+    document.querySelectorAll(".seg button").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        mode = btn.getAttribute("data-mode");
+        document.querySelectorAll(".seg button").forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+        tooltip.classList.remove("on");
+        draw();
+      });
+    });
+    var rt;
+    window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(draw, 120); });
+    draw();
+  }
+})();
+</script>
+</body>
+</html>

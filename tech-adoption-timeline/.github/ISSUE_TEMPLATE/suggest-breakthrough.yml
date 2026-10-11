@@ -1,0 +1,33 @@
+name: Suggest a breakthrough
+description: Propose a technology to add to the timeline
+title: "Add: "
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Breakthrough
+      placeholder: e.g. Photography
+    validations:
+      required: true
+  - type: input
+    id: year
+    attributes:
+      label: Year
+      description: The year it became real or usable, not when someone first imagined it.
+      placeholder: e.g. 1839
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it mattered
+      description: One or two sentences, under 240 characters.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source link
+      placeholder: https://
+    validations:
+      required: true

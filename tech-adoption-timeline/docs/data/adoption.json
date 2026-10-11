@@ -1,0 +1,128 @@
+{
+  "notes": "Household series come from Our World in Data's collation of US technology adoption (Comin & Hobijn 2004, Horace Dediu and others). They are trimmed to the adoption phase and sampled every few years. Generative AI comes from the Real-Time Population Survey (Bick, Blandin & Deming) via FRED. It counts working-age ADULTS who use generative AI at all, not households, so treat that comparison as directional.",
+  "series": [
+    {
+      "id": "generative-ai",
+      "label": "Generative AI",
+      "launch_year": 2022.92,
+      "measure": "Share of US adults aged 18-64 who use generative AI for any purpose",
+      "source": "https://fred.stlouisfed.org/series/RPSGENAIUSAGESHAREALL",
+      "points": [
+        { "year": 2024.5, "pct": 44.6 },
+        { "year": 2024.75, "pct": 46.3 },
+        { "year": 2025.0, "pct": 48.0 },
+        { "year": 2025.25, "pct": 51.9 },
+        { "year": 2025.5, "pct": 54.5 },
+        { "year": 2025.75, "pct": 55.9 },
+        { "year": 2026.0, "pct": 57.9 },
+        { "year": 2026.25, "pct": 61.8 }
+      ]
+    },
+    {
+      "id": "landline",
+      "label": "Telephone (landline)",
+      "launch_year": 1876,
+      "measure": "Share of US households",
+      "source": "https://ourworldindata.org/grapher/technology-adoption-by-households-in-the-united-states",
+      "points": [
+        { "year": 1903, "pct": 10 },
+        { "year": 1910, "pct": 24.5 },
+        { "year": 1920, "pct": 34 },
+        { "year": 1929, "pct": 41 },
+        { "year": 1933, "pct": 32 },
+        { "year": 1940, "pct": 37 },
+        { "year": 1946, "pct": 50 },
+        { "year": 1950, "pct": 62 },
+        { "year": 1955, "pct": 71.67 },
+        { "year": 1960, "pct": 78.5 },
+        { "year": 1965, "pct": 85 },
+        { "year": 1969, "pct": 90 },
+        { "year": 1980, "pct": 92.5 },
+        { "year": 1990, "pct": 93.5 },
+        { "year": 2002, "pct": 95 }
+      ]
+    },
+    {
+      "id": "electric-power",
+      "label": "Electric power",
+      "launch_year": 1882,
+      "measure": "Share of US households",
+      "source": "https://ourworldindata.org/grapher/technology-adoption-by-households-in-the-united-states",
+      "points": [
+        { "year": 1908, "pct": 10 },
+        { "year": 1912, "pct": 16 },
+        { "year": 1916, "pct": 22 },
+        { "year": 1920, "pct": 33.5 },
+        { "year": 1925, "pct": 52 },
+        { "year": 1930, "pct": 68 },
+        { "year": 1935, "pct": 68.5 },
+        { "year": 1940, "pct": 78 },
+        { "year": 1945, "pct": 85 },
+        { "year": 1950, "pct": 94 },
+        { "year": 1955, "pct": 98.33 },
+        { "year": 1960, "pct": 99 }
+      ]
+    },
+    {
+      "id": "radio",
+      "label": "Radio",
+      "launch_year": 1920,
+      "measure": "Share of US households",
+      "source": "https://ourworldindata.org/grapher/technology-adoption-by-households-in-the-united-states",
+      "points": [
+        { "year": 1925, "pct": 10 },
+        { "year": 1926, "pct": 17 },
+        { "year": 1928, "pct": 28 },
+        { "year": 1930, "pct": 45 },
+        { "year": 1932, "pct": 60 },
+        { "year": 1935, "pct": 68 },
+        { "year": 1938, "pct": 78 },
+        { "year": 1940, "pct": 81 },
+        { "year": 1945, "pct": 88 },
+        { "year": 1950, "pct": 92 },
+        { "year": 1955, "pct": 96 },
+        { "year": 1970, "pct": 98 }
+      ]
+    },
+    {
+      "id": "internet",
+      "label": "Internet",
+      "launch_year": 1991,
+      "measure": "Share of US households",
+      "source": "https://ourworldindata.org/grapher/technology-adoption-by-households-in-the-united-states",
+      "points": [
+        { "year": 1993, "pct": 10 },
+        { "year": 1995, "pct": 13 },
+        { "year": 1997, "pct": 19 },
+        { "year": 1999, "pct": 34 },
+        { "year": 2000, "pct": 42 },
+        { "year": 2001, "pct": 49 },
+        { "year": 2003, "pct": 54 },
+        { "year": 2005, "pct": 61 },
+        { "year": 2008, "pct": 68 },
+        { "year": 2010, "pct": 74 },
+        { "year": 2012, "pct": 81 },
+        { "year": 2014, "pct": 83 },
+        { "year": 2016, "pct": 88 }
+      ]
+    },
+    {
+      "id": "smartphone",
+      "label": "Smartphone",
+      "launch_year": 2007.5,
+      "measure": "Share of US households (OWID 'smartphone usage' series)",
+      "source": "https://ourworldindata.org/grapher/technology-adoption-by-households-in-the-united-states",
+      "points": [
+        { "year": 2011, "pct": 35 },
+        { "year": 2012, "pct": 45 },
+        { "year": 2013, "pct": 54 },
+        { "year": 2014, "pct": 57 },
+        { "year": 2015, "pct": 68 },
+        { "year": 2016, "pct": 73 },
+        { "year": 2017, "pct": 73 },
+        { "year": 2018, "pct": 77 },
+        { "year": 2019, "pct": 81 }
+      ]
+    }
+  ]
+}
