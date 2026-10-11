@@ -32,6 +32,11 @@ tech-adoption-timeline/
 Most of your changes will be to `docs/data/breakthroughs.json`. The page reads it automatically.
 
 ---
+## How to use it
+
+1. Open the live page
+2. Look at the timeline
+3. Add a new breakthrough using the pull request loop
 
 ## Part 1: Get it online (one time, ~15 minutes)
 
