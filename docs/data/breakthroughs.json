@@ -62,6 +62,13 @@
       "source": "https://ethw.org/Milestones:Pearl_Street_Station,_1882",
       "adoption_series": "electric-power"
     },
+
+   {"id": "wright-flyer",
+      "year": 1903,
+      "title": "Wright Flyer",
+      "why": "The first sustained, controlled, powered flight, in December 1903, started the age of aviation.",
+      "source": "https://en.wikipedia.org/wiki/Wright_Flyer",
+    },
     {
       "id": "commercial-radio",
       "year": 1920,
