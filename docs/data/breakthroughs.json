@@ -42,8 +42,9 @@
       "id": "telegraph",
       "year": 1844,
       "title": "Electric telegraph",
-      "why": "Samuel Morse's first public message, \"What hath God wrought,\" travelled from Washington to Baltimore in 1844. News could now move faster than any messenger.",
-      "source": "https://en.wikipedia.org/wiki/Electrical_telegraph"
+      "why": "Samuel Morse's first public message, \"What hath God wrought,\" travelled from Washington to Baltimore in 1844. News could now move faster than any messenger.", 
+"source": "https://en.wikipedia.org/wiki/Electrical_telegraph"
+      
     },
     {
       "id": "telephone",
