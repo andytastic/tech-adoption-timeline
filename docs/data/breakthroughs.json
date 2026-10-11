@@ -32,6 +32,13 @@
       "source": "https://collection.sciencemuseumgroup.org.uk/objects/co50900/newcomen-atmospheric-engine-atmospheric-steam-engine"
     },
     {
+      "id": "photography",
+      "year": 1839,
+      "title": "Photography",
+      "why": "The daguerreotype, announced in Paris in 1839, was the first practical photographic process. For the first time, a moment could be captured and reproduced without an artist's hand.",
+      "source": "https://en.wikipedia.org/wiki/Daguerreotype"
+    },
+    {
       "id": "telephone",
       "year": 1876,
       "title": "Telephone",
