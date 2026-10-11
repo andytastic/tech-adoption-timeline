@@ -2,6 +2,12 @@
 
 A thousand years of technological breakthroughs, and how fast the modern ones spread across the US. Generative AI is plotted on the same curve. This shows adoption rates through time. 
 
+## Why I built this
+
+- To learn the GitHub workflow by doing it
+- To see how fast new technologies spread
+- **Next:** write my first skill
+
 **Live page:** `https://<your-username>.github.io/tech-adoption-timeline/` (once GitHub Pages is on)
 
 ---
