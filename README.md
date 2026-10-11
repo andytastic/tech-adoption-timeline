@@ -1,6 +1,6 @@
 # Breakthroughs and Adoption
 
-A thousand years of technological breakthroughs, and how fast the modern ones spread across the US. Generative AI is plotted on the same curve.
+A thousand years of technological breakthroughs, and how fast the modern ones spread across the US. Generative AI is plotted on the same curve. This shows adoption rates through time. 
 
 **Live page:** `https://<your-username>.github.io/tech-adoption-timeline/` (once GitHub Pages is on)
 
