@@ -27,11 +27,12 @@
     {
       "id": "steam-engine",
       "year": 1712,
+      "approx": true,
       "title": "Steam engine",
       "why": "Newcomen's engine near Dudley Castle was the first practical steam engine. It drained mines and gave industry power that did not depend on wind, water or animals.",
       "source": "https://collection.sciencemuseumgroup.org.uk/objects/co50900/newcomen-atmospheric-engine-atmospheric-steam-engine"
     },
-	{
+    {
 	"id": "Smallpox Vaccine",
 	"year": 1796,
 	"title": Smallpox Vaccine,
