@@ -92,7 +92,7 @@ Make a new branch and delete the `"source"` line from one entry. Commit, push an
 
 ### Exercise 4: Protect `main`
 
-**Settings → Branches → Add branch ruleset** (or "Add rule"). Target `main`, then turn on **Require a pull request before merging** and **Require status checks to pass** (pick "validate"). Now nobody can push straight to `main` or merge red work, including you. This is how most team repos are set up.
+**Settings → Branches → Add branch ruleset** (or "Add rule"). Target `main`, then turnn onnnr **Require a pull request before merging** and **Require status checks to pass** (pick "validate"). Now nobody can push straight to `main` or merge red work, including you. This is how most team repos are set up.
 
 ### Exercise 5: Tag a release
 
