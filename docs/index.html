@@ -78,15 +78,25 @@
   .hero-note { grid-column: 1 / -1; font-size: 13px; color: var(--muted); margin: 8px 0 0; }
   @media (max-width: 560px) { .hero { grid-template-columns: 1fr; } }
 
-  /* Timeline strip */
-  .strip { position: relative; height: 64px; margin: 4px 8px 8px; }
-  .strip-axis { position: absolute; left: 0; right: 0; top: 30px; height: 1px; background: var(--axis); }
-  .strip-dot { position: absolute; top: 24px; width: 13px; height: 13px; margin-left: -6.5px; border-radius: 50%;
-    background: var(--accent); border: 2px solid var(--surface); cursor: pointer; padding: 0; }
-  .strip-dot:hover, .strip-dot:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
-  .strip-tick { position: absolute; top: 44px; font-size: 12px; color: var(--muted); transform: translateX(-50%);
+  /* Timeline strip (piecewise scale: recent centuries get more room) */
+  .strip { position: relative; height: 92px; margin: 4px 8px 8px; }
+  .strip-band { position: absolute; top: 34px; height: 28px; background: var(--grid); opacity: .45; border-radius: 4px; }
+  .strip-axis { position: absolute; left: 0; right: 0; top: 48px; height: 1px; background: var(--axis); }
+  .strip-break { position: absolute; top: 38px; width: 1px; height: 21px; background: var(--axis); }
+  .strip-dot { position: absolute; top: 42px; width: 13px; height: 13px; margin-left: -6.5px; border-radius: 50%;
+    background: var(--surface); border: 2px solid var(--accent); cursor: pointer; padding: 0; }
+  .strip-dot.has-series { background: var(--accent); border-color: var(--surface); box-shadow: 0 0 0 1px var(--accent); }
+  .strip-dot:hover, .strip-dot:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .strip-year { position: absolute; font-size: 11px; color: var(--ink-2); transform: translateX(-50%);
+    font-variant-numeric: tabular-nums; white-space: nowrap; pointer-events: none; }
+  .strip-year.r0 { top: 18px; } .strip-year.r1 { top: 2px; }
+  .strip-tick { position: absolute; top: 68px; font-size: 12px; color: var(--muted); transform: translateX(-50%);
     font-variant-numeric: tabular-nums; white-space: nowrap; }
   .strip-caption { font-size: 13px; color: var(--muted); margin: 0; }
+  .strip-caption .k { display: inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: -1px; margin-right: 4px; }
+  .strip-caption .k.fill { background: var(--accent); }
+  .strip-caption .k.ring { border: 2px solid var(--accent); }
+  @media (max-width: 600px) { .strip-year { display: none; } .strip { height: 76px; } .strip-band { top: 18px; } .strip-axis { top: 32px; } .strip-break { top: 22px; } .strip-dot { top: 27px; width: 11px; height: 11px; margin-left: -5.5px; } .strip-tick { top: 52px; } }
 
   .events { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 1px; background: var(--border);
     border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
@@ -104,12 +114,27 @@
   .seg button { font: inherit; font-size: 14px; border: 0; background: transparent; color: var(--ink-2); padding: 7px 12px; cursor: pointer; }
   .seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
   .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0 0 8px; padding: 0; list-style: none; font-size: 14px; color: var(--ink-2); }
-  .legend li { display: inline-flex; align-items: center; gap: 6px; }
-  .legend .key { width: 16px; height: 2px; border-radius: 1px; display: inline-block; }
-  .legend .key.thick { height: 3px; }
+  .legend li { display: inline-flex; align-items: center; gap: 6px; cursor: default; border-radius: 4px; padding: 2px 4px; }
+  .legend li:hover, .legend li:focus-visible { background: var(--grid); outline: none; }
+  .legend .key { width: 18px; height: 3px; border-radius: 2px; display: inline-block; }
+  .legend .key.thick { height: 4px; }
+  .series { transition: opacity .15s; }
+  .chart.focusing .series { opacity: .15; }
+  .chart.focusing .series.is-focus { opacity: 1; }
+  .end-label { font-size: 13px; font-weight: 600; fill: var(--ink); paint-order: stroke; stroke: var(--surface);
+    stroke-width: 4px; stroke-linejoin: round; }
+  .end-label .v { font-weight: 400; fill: var(--ink-2); }
+  .ref-label { fill: var(--muted); font-size: 12px; paint-order: stroke; stroke: var(--surface); stroke-width: 4px; }
+  .bar-label { fill: var(--ink); font-size: 14px; }
+  .bar-label.hero { font-weight: 700; }
+  .bar-value { fill: var(--ink-2); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .bar-value.hero { fill: var(--ink); font-weight: 700; }
+  .bar-row:hover .bar-hit, .bar-row:focus .bar-hit { fill: var(--grid); opacity: .5; }
+  .bar-row { outline: none; }
+  .callout { margin: 14px 0 0; font-size: 14px; color: var(--ink-2); border-left: 3px solid var(--accent); padding: 2px 0 2px 12px; max-width: 68ch; }
   .chart { position: relative; }
   .chart svg { display: block; width: 100%; height: auto; overflow: visible; }
-  .tick-label { fill: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .tick-label { fill: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
   .axis-title { fill: var(--muted); font-size: 12px; }
   .tooltip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--border);
     border-radius: 8px; padding: 8px 10px; font-size: 13px; box-shadow: 0 4px 16px rgba(0,0,0,.12); min-width: 170px;
@@ -119,7 +144,7 @@
   .tooltip .tt-row { display: grid; grid-template-columns: 14px auto 1fr; gap: 8px; align-items: center; }
   .tooltip .tt-row b { font-variant-numeric: tabular-nums; color: var(--ink); }
   .tooltip .tt-row span:last-child { color: var(--ink-2); }
-  .tooltip .tt-key { width: 14px; height: 2px; border-radius: 1px; }
+  .tooltip .tt-key { width: 14px; height: 3px; border-radius: 2px; }
   details { margin-top: 16px; }
   summary { cursor: pointer; color: var(--ink-2); font-size: 14px; }
   table { border-collapse: collapse; width: 100%; font-size: 14px; margin-top: 10px; }
@@ -138,27 +163,27 @@
 <main class="wrap">
   <p class="eyebrow">1040 → 2026</p>
   <h1>A thousand years of breakthroughs, and how fast they spread</h1>
-  <p class="dek">Big inventions used to take generations to reach most people. Each wave has moved faster than the last. This page puts generative AI on that curve.</p>
+  <p class="dek">Big inventions used to take generations to reach most people, and each wave moved faster than the last. Generative AI started from a high base, but year by year it is spreading at about the same pace as smartphones and radio did.</p>
 
   <div class="hero" id="hero" hidden>
     <div class="hero-num" id="hero-num"></div>
     <div class="hero-text" id="hero-text"></div>
-    <p class="hero-note">Not a like-for-like comparison: the older figures count households that own a technology, and this one counts adults who use AI at all. See method notes below.</p>
+    <p class="hero-note" id="hero-note"></p>
   </div>
 
   <section aria-labelledby="t-timeline">
     <h2 id="t-timeline">The breakthroughs</h2>
-    <p class="sub">Each dot is one breakthrough, placed on a 1,000-year line. They crowd together at the right-hand end.</p>
+    <p class="sub">Each dot is one breakthrough. The line is stretched in three steps so recent dots don't pile up: the first section covers 800 years, the middle 100, and the last 126.</p>
     <div class="card">
       <div class="strip" id="strip" role="list" aria-label="Breakthroughs on a timeline from 1000 to today"></div>
-      <p class="strip-caption">Select a dot to jump to its entry.</p>
+      <p class="strip-caption"><span class="k fill"></span>On the adoption charts below · <span class="k ring"></span>Other breakthroughs · Select a dot to jump to its entry.</p>
     </div>
     <ol class="events" id="events"></ol>
   </section>
 
   <section aria-labelledby="t-adoption">
     <h2 id="t-adoption">How fast they spread</h2>
-    <p class="sub">Share of the US reached by each technology. Count from each launch year to compare speed, or switch to calendar years to see the eras.</p>
+    <p class="sub">Share of the US reached by each technology. Count from each launch year to line them up, or switch to calendar years to see the eras. Hover a name to pick out one line.</p>
     <div class="card">
       <div class="controls">
         <div class="seg" role="group" aria-label="Horizontal axis">
@@ -177,10 +202,22 @@
     </div>
   </section>
 
+  <section aria-labelledby="t-pace">
+    <h2 id="t-pace">How fast each one grew at its quickest</h2>
+    <p class="sub">Percentage points of the US gained per year, over each technology's steepest 18 months in the data. This shows the pace of spread, not how far it has got.</p>
+    <div class="card">
+      <div class="chart" id="pace">
+        <div class="tooltip" id="pace-tip" role="status" aria-live="polite"></div>
+      </div>
+      <p class="callout" id="pace-callout"></p>
+    </div>
+  </section>
+
   <section aria-labelledby="t-method" class="method">
     <h2 id="t-method">Method notes</h2>
     <p id="method-notes"></p>
     <p>"Launch" uses the breakthrough dates listed above: telephone 1876, central power 1882, commercial radio 1920, public Web 1991, iPhone mid-2007, ChatGPT late 2022. Pick different launch dates and the curves shift.</p>
+    <p>"Pace" is the steepest straight-line climb over any 18-month window, reading between the published data points. The older series are sampled every few years, so their short bursts are smoothed out. The AI survey only starts in mid-2024, so it can't show the first 18 months after ChatGPT launched.</p>
     <p>The generative AI survey counts anyone who uses it at all. That is a lower bar than having a phone line or electricity wired into the house. Read the gap between the curves as a sense of the trend, not a precise measurement.</p>
   </section>
 
@@ -210,54 +247,123 @@
   function fmtYear(y) { return String(Math.floor(y)); }
   function fmtPct(p) { return (Math.round(p * 10) / 10).toString() + "%"; }
 
+  var AI = "generative-ai";
+  var PACE_WINDOW = 1.5; // years
+
   Promise.all([
     fetch("data/breakthroughs.json").then(function (r) { if (!r.ok) throw r; return r.json(); }),
     fetch("data/adoption.json").then(function (r) { if (!r.ok) throw r; return r.json(); })
   ]).then(function (res) {
-    renderHero(res[1]);
+    var paces = computePaces(res[1].series);
+    renderHero(res[1], paces);
     renderTimeline(res[0].breakthroughs);
     renderAdoption(res[1]);
+    renderPace(res[1], paces);
     document.getElementById("method-notes").textContent = res[1].notes;
-  }).catch(function () {
+  }).catch(function (e) {
+    if (window.console) console.error(e);
     var box = el("div", { class: "error" },
       "The data files couldn't load. If you opened this file straight from your computer, browsers block that. View it on GitHub Pages, or run `python3 -m http.server` in the docs folder and visit http://localhost:8000.");
     document.querySelector(".wrap").insertBefore(box, document.getElementById("hero"));
   });
 
+  // Straight-line value of a series at a calendar year, or null outside its data
+  function pctAt(pts, year) {
+    for (var i = 0; i < pts.length - 1; i++) {
+      var a = pts[i], b = pts[i + 1];
+      if (year >= a.year && year <= b.year) return a.pct + (year - a.year) / (b.year - a.year) * (b.pct - a.pct);
+    }
+    if (pts.length && Math.abs(year - pts[pts.length - 1].year) < 1e-9) return pts[pts.length - 1].pct;
+    return null;
+  }
+
+  // ---------- Pace: steepest climb over any PACE_WINDOW-year stretch ----------
+  function computePaces(series) {
+    return series.map(function (s) {
+      var pts = s.points, first = pts[0].year, last = pts[pts.length - 1].year;
+      var w = Math.min(PACE_WINDOW, last - first);
+      var best = { rate: -Infinity, from: first };
+      for (var t = first; t + w <= last + 1e-9; t += 0.05) {
+        var a = pctAt(pts, t), b = pctAt(pts, Math.min(t + w, last));
+        if (a == null || b == null) continue;
+        var r = (b - a) / w;
+        if (r > best.rate) best = { rate: r, from: t };
+      }
+      return { s: s, rate: best.rate, from: best.from, to: best.from + w,
+               a: pctAt(pts, best.from), b: pctAt(pts, Math.min(best.from + w, last)) };
+    }).sort(function (x, y) { return y.rate - x.rate; });
+  }
+  function fmtRate(r) { return r.toFixed(1); }
+  function shortName(s) { return s.label.replace(/ \(.*\)$/, ""); }
+  function fmtWhen(y) {
+    var q = Math.round((y % 1) * 4);
+    return q === 0 || q === 4 ? String(Math.round(y)) : Math.floor(y) + " Q" + (q + 1);
+  }
+
   // ---------- Hero ----------
-  function renderHero(adoption) {
-    var ai = adoption.series.filter(function (s) { return s.id === "generative-ai"; })[0];
+  function renderHero(adoption, paces) {
+    var ai = paces.filter(function (p) { return p.s.id === AI; })[0];
     if (!ai) return;
-    var last = ai.points[ai.points.length - 1];
-    var yearsIn = (last.year - ai.launch_year).toFixed(1);
-    var q = Math.round((last.year % 1) * 4) + 1;
-    document.getElementById("hero-num").textContent = Math.round(last.pct) + "%";
+    var others = paces.filter(function (p) { return p.s.id !== AI; });
+    var close = others.filter(function (p) { return p.rate >= ai.rate * 0.75; });
+    var faster = others.filter(function (p) { return p.rate > ai.rate; });
+
+    document.getElementById("hero-num").textContent = fmtRate(ai.rate);
     var t = document.getElementById("hero-text");
     t.textContent = "";
-    t.appendChild(document.createTextNode("of US adults aged 18–64 were using generative AI by "));
-    t.appendChild(el("strong", null, "Q" + q + " " + Math.floor(last.year)));
-    t.appendChild(document.createTextNode(", about " + yearsIn + " years after ChatGPT launched. For comparison, US household internet passed 50% in 2002, 11 years after the Web opened to the public."));
+    t.appendChild(el("strong", null, "points a year"));
+    t.appendChild(document.createTextNode(" is the fastest generative AI has spread among US adults so far. "));
+    if (close.length) {
+      var list = close.map(function (p) { return shortName(p.s).toLowerCase() + " (" + fmtRate(p.rate) + ")"; });
+      var joined = list.length > 1 ? list.slice(0, -1).join(", ") + " and " + list[list.length - 1] : list[0];
+      t.appendChild(document.createTextNode((faster.length ? "Slower than " : "About the same pace as ") + joined + " at their quickest."));
+    } else {
+      t.appendChild(document.createTextNode("Faster than any earlier technology here."));
+    }
+
+    var aiSeries = ai.s, firstPt = aiSeries.points[0], lastPt = aiSeries.points[aiSeries.points.length - 1];
+    document.getElementById("hero-note").textContent =
+      "It did get a head start: " + Math.round(firstPt.pct) + "% of adults were already using it when the survey began in " +
+      fmtWhen(firstPt.year) + ", and " + Math.round(lastPt.pct) + "% by " + fmtWhen(lastPt.year) +
+      ". The older figures also count households that own a technology, not adults who use it at all. See the method notes.";
     document.getElementById("hero").hidden = false;
   }
 
   // ---------- Timeline ----------
+  // Piecewise scale: [fromYear, toYear, fromFrac, toFrac]
+  var SEGS = [[START, 1800, 0, 0.16], [1800, 1900, 0.16, 0.46], [1900, NOW, 0.46, 1]];
+  function stripX(y) {
+    for (var i = 0; i < SEGS.length; i++) {
+      var g = SEGS[i];
+      if (y <= g[1] || i === SEGS.length - 1) return (g[2] + (y - g[0]) / (g[1] - g[0]) * (g[3] - g[2])) * 100;
+    }
+  }
+
   function renderTimeline(items) {
     items = items.slice().sort(function (a, b) { return a.year - b.year; });
     var strip = document.getElementById("strip");
     var list = document.getElementById("events");
-    var span = NOW - START;
 
-    [1000, 1250, 1500, 1750, 2000].forEach(function (y) {
-      var t = el("span", { class: "strip-tick" }, String(y));
-      t.style.left = ((y - START) / span * 100) + "%";
-      strip.appendChild(t);
+    SEGS.forEach(function (g, i) {
+      if (i % 2) {
+        var band = el("div", { class: "strip-band", "aria-hidden": "true" });
+        band.style.left = g[2] * 100 + "%"; band.style.width = (g[3] - g[2]) * 100 + "%";
+        strip.appendChild(band);
+      }
     });
     strip.appendChild(el("div", { class: "strip-axis", "aria-hidden": "true" }));
+    var narrow = strip.clientWidth < 480;
+    (narrow ? [1000, 1800, 1900, 2000] : [1000, 1400, 1800, 1850, 1900, 1950, 2000]).forEach(function (y) {
+      var t = el("span", { class: "strip-tick" }, String(y));
+      t.style.left = stripX(y) + "%";
+      strip.appendChild(t);
+    });
 
-    items.forEach(function (b) {
+    items.forEach(function (b, i) {
       var label = (b.approx ? "c. " : "") + b.year + ", " + b.title;
-      var dot = el("button", { class: "strip-dot", type: "button", role: "listitem", "aria-label": label, title: label });
-      dot.style.left = ((b.year - START) / span * 100) + "%";
+      var dot = el("button", { class: "strip-dot" + (b.adoption_series ? " has-series" : ""), type: "button",
+        role: "listitem", "aria-label": label, title: label });
+      dot.style.left = stripX(b.year) + "%";
       dot.addEventListener("click", function () {
         var target = document.getElementById("e-" + b.id);
         target.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -265,14 +371,16 @@
         setTimeout(function () { target.classList.remove("flash"); }, 1600);
       });
       strip.appendChild(dot);
+      var yl = el("span", { class: "strip-year r" + (i % 2), "aria-hidden": "true" }, String(b.year));
+      yl.style.left = stripX(b.year) + "%";
+      strip.appendChild(yl);
 
       var li = el("li", { class: "event", id: "e-" + b.id });
       li.appendChild(el("div", { class: "event-year" }, (b.approx ? "c. " : "") + b.year));
       li.appendChild(el("div", { class: "event-title" }, b.title));
       li.appendChild(el("p", { class: "event-why" }, b.why));
       var src = el("div", { class: "event-src" });
-      var a = el("a", { href: b.source, rel: "noopener" }, "Source");
-      src.appendChild(a);
+      src.appendChild(el("a", { href: b.source, rel: "noopener" }, "Source"));
       li.appendChild(src);
       list.appendChild(li);
     });
@@ -285,14 +393,25 @@
     var chart = document.getElementById("chart");
     var tooltip = document.getElementById("tooltip");
 
-    // Legend (always present; identity never by color alone)
+    function setFocus(id) {
+      chart.classList.toggle("focusing", !!id);
+      chart.querySelectorAll(".series").forEach(function (g) {
+        g.classList.toggle("is-focus", g.getAttribute("data-id") === id);
+      });
+    }
+
+    // Legend (always present; identity never by color alone). Hover or focus to pick out a line.
     var legend = document.getElementById("legend");
     series.forEach(function (s) {
-      var li = el("li");
-      var key = el("span", { class: "key" + (s.id === "generative-ai" ? " thick" : "") });
+      var li = el("li", { tabindex: 0 });
+      var key = el("span", { class: "key" + (s.id === AI ? " thick" : "") });
       key.style.background = "var(--s-" + s.id + ")";
       li.appendChild(key);
       li.appendChild(document.createTextNode(s.label));
+      li.addEventListener("pointerenter", function () { setFocus(s.id); });
+      li.addEventListener("pointerleave", function () { setFocus(null); });
+      li.addEventListener("focus", function () { setFocus(s.id); });
+      li.addEventListener("blur", function () { setFocus(null); });
       legend.appendChild(li);
     });
 
@@ -323,19 +442,25 @@
       var old = chart.querySelector("svg");
       if (old) old.remove();
       var W = Math.max(300, chart.clientWidth);
-      var H = Math.round(Math.min(420, Math.max(260, W * 0.55)));
-      var m = { t: 12, r: 12, b: 40, l: 40 };
+      var narrow = W < 520;
+      var H = Math.round(Math.min(460, Math.max(300, W * 0.58)));
+      var m = { t: 16, r: narrow ? 8 : 140, b: 40, l: 44 };
       var iw = W - m.l - m.r, ih = H - m.t - m.b;
 
       var x0, x1, ticks;
-      if (mode === "since") { x0 = 0; x1 = 90; ticks = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]; }
-      else { x0 = 1900; x1 = 2026; ticks = [1900, 1920, 1940, 1960, 1980, 2000, 2020]; }
-      if (W < 480) ticks = ticks.filter(function (t, i) { return i % 2 === 0; });
+      if (mode === "since") { x0 = 0; x1 = 60; ticks = [0, 10, 20, 30, 40, 50, 60]; }
+      else { x0 = 1900; x1 = 2027; ticks = [1900, 1920, 1940, 1960, 1980, 2000, 2020]; }
+      if (narrow) ticks = ticks.filter(function (t, i) { return i % 2 === 0; });
       var sx = function (v) { return m.l + (v - x0) / (x1 - x0) * iw; };
       var sy = function (v) { return m.t + ih - v / 100 * ih; };
 
       var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img",
-        "aria-label": "Line chart of US adoption share over time for six technologies. Full data is in the table below." });
+        "aria-label": "Line chart of US adoption share over time for " + series.length + " technologies. Full data is in the table below." });
+      var clipId = "plot-clip";
+      var defs = svgEl("defs");
+      var cp = svgEl("clipPath", { id: clipId });
+      cp.appendChild(svgEl("rect", { x: m.l - 6, y: 0, width: iw + 12, height: m.t + ih + 6 }));
+      defs.appendChild(cp); svg.appendChild(defs);
 
       // Grid + y labels
       [0, 25, 50, 75, 100].forEach(function (v) {
@@ -344,28 +469,87 @@
         var t = svgEl("text", { x: m.l - 8, y: sy(v) + 4, "text-anchor": "end", class: "tick-label" });
         t.textContent = v + "%"; svg.appendChild(t);
       });
+      // Halfway reference
+      svg.appendChild(svgEl("line", { x1: m.l, x2: m.l + iw, y1: sy(50), y2: sy(50),
+        stroke: "var(--muted)", "stroke-width": 1, "stroke-dasharray": "4 4", opacity: 0.7 }));
+
       ticks.forEach(function (v) {
-        var t = svgEl("text", { x: sx(v), y: m.t + ih + 18, "text-anchor": "middle", class: "tick-label" });
+        var t = svgEl("text", { x: sx(v), y: m.t + ih + 20, "text-anchor": "middle", class: "tick-label" });
         t.textContent = String(v); svg.appendChild(t);
       });
-      var at = svgEl("text", { x: m.l + iw, y: H - 4, "text-anchor": "end", class: "axis-title" });
+      var at = svgEl("text", { x: m.l + iw, y: H - 2, "text-anchor": "end", class: "axis-title" });
       at.textContent = mode === "since" ? "Years since launch →" : "Year →";
       svg.appendChild(at);
 
       // Lines (generative AI drawn last, on top)
-      var order = series.slice().sort(function (a, b) { return (a.id === "generative-ai") - (b.id === "generative-ai"); });
+      var labels = [];
+      var order = series.slice().sort(function (a, b) { return (a.id === AI) - (b.id === AI); });
       order.forEach(function (s) {
-        var pts = s.points.filter(function (p) { var x = xOf(s, p); return x >= x0 && x <= x1; });
-        if (!pts.length) return;
-        var d = pts.map(function (p, i) { return (i ? "L" : "M") + sx(xOf(s, p)).toFixed(1) + "," + sy(p.pct).toFixed(1); }).join("");
-        var hero = s.id === "generative-ai";
-        svg.appendChild(svgEl("path", { d: d, fill: "none", stroke: "var(--surface)", "stroke-width": hero ? 6 : 5,
+        var all = s.points.map(function (p) { return { x: xOf(s, p), pct: p.pct }; });
+        var vis = all.filter(function (p, i) {
+          var prev = all[i - 1], next = all[i + 1];
+          return (p.x >= x0 && p.x <= x1) || (next && next.x > x0 && p.x < x0) || (prev && prev.x < x1 && p.x > x1);
+        });
+        if (vis.length < 1) return;
+        var hero = s.id === AI;
+        var g = svgEl("g", { class: "series", "data-id": s.id });
+        var d = vis.map(function (p, i) { return (i ? "L" : "M") + sx(p.x).toFixed(1) + "," + sy(p.pct).toFixed(1); }).join("");
+        var lines = svgEl("g", { "clip-path": "url(#" + clipId + ")" });
+        lines.appendChild(svgEl("path", { d: d, fill: "none", stroke: "var(--surface)", "stroke-width": hero ? 7 : 6,
           "stroke-linejoin": "round", "stroke-linecap": "round" }));
-        svg.appendChild(svgEl("path", { d: d, fill: "none", stroke: "var(--s-" + s.id + ")", "stroke-width": hero ? 3 : 2,
+        lines.appendChild(svgEl("path", { d: d, fill: "none", stroke: "var(--s-" + s.id + ")", "stroke-width": hero ? 3.5 : 2.5,
           "stroke-linejoin": "round", "stroke-linecap": "round" }));
-        var lp = pts[pts.length - 1];
-        svg.appendChild(svgEl("circle", { cx: sx(xOf(s, lp)), cy: sy(lp.pct), r: hero ? 5 : 4,
-          fill: "var(--s-" + s.id + ")", stroke: "var(--surface)", "stroke-width": 2 }));
+        g.appendChild(lines);
+
+        // End point: last real point, or where the line leaves the chart
+        var lastIn = all.filter(function (p) { return p.x <= x1; }).pop();
+        var nextOut = all.filter(function (p) { return p.x > x1; })[0];
+        var end = lastIn;
+        if (nextOut && lastIn) {
+          end = { x: x1, pct: lastIn.pct + (x1 - lastIn.x) / (nextOut.x - lastIn.x) * (nextOut.pct - lastIn.pct), cut: true };
+        }
+        if (!end || end.x < x0) { svg.appendChild(g); return; }
+        if (!end.cut) {
+          g.appendChild(svgEl("circle", { cx: sx(end.x), cy: sy(end.pct), r: hero ? 5.5 : 4,
+            fill: "var(--s-" + s.id + ")", stroke: "var(--surface)", "stroke-width": 2 }));
+        }
+        labels.push({ s: s, g: g, x: sx(end.x), y: sy(end.pct), pct: end.pct, cut: end.cut, hero: hero });
+        svg.appendChild(g);
+      });
+
+      // Direct end labels, nudged apart so they never overlap
+      var CH = 7.2, LH = 17;
+      // "Half the US" sits in the label gutter and takes part in the nudging
+      var refLabel = { ref: true, g: svg, x: m.l + iw, y: sy(50), w: 11 * 6.6 };
+      labels.forEach(function (L) {
+        if (L.ref) return;
+        var text = shortName(L.s) + "  " + Math.round(L.pct) + "%";
+        L.w = text.length * CH;
+        L.anchorEnd = L.x + 10 + L.w > W - 2;
+        L.left = L.anchorEnd ? L.x - 10 - L.w : L.x + 10;
+        L.ty = L.anchorEnd ? L.y - 10 : L.y + 4;
+      });
+      if (!narrow) { refLabel.anchorEnd = false; refLabel.left = refLabel.x + 10; refLabel.ty = refLabel.y + 4; labels.push(refLabel); }
+      labels.sort(function (a, b) { return a.ty - b.ty; });
+      for (var pass = 0; pass < 4; pass++) {
+        for (var i = 0; i < labels.length; i++) for (var j = 0; j < i; j++) {
+          var A = labels[j], B = labels[i];
+          var overlapX = A.left < B.left + B.w && B.left < A.left + A.w;
+          if (overlapX && B.ty - A.ty < LH) B.ty = A.ty + LH;
+        }
+      }
+      labels.forEach(function (L) {
+        L.ty = Math.max(m.t + 10, Math.min(m.t + ih - 4, L.ty));
+        if (L.ref) {
+          var rt = svgEl("text", { x: L.left, y: L.ty, class: "ref-label" });
+          rt.textContent = "Half the US"; svg.appendChild(rt); return;
+        }
+        var t = svgEl("text", { x: L.anchorEnd ? L.x - 10 : L.x + 10, y: L.ty, "text-anchor": L.anchorEnd ? "end" : "start", class: "end-label" });
+        t.appendChild(document.createTextNode(shortName(L.s) + " "));
+        var v = svgEl("tspan", { class: "v" }); v.textContent = Math.round(L.pct) + "%" + (L.cut ? " →" : "");
+        t.appendChild(v);
+        var lg = svgEl("g", { class: "series", "data-id": L.s.id });
+        lg.appendChild(t); svg.appendChild(lg);
       });
 
       // Crosshair + hit layer
@@ -384,18 +568,21 @@
         tooltip.textContent = "";
         tooltip.appendChild(el("div", { class: "tt-head" },
           mode === "since" ? "Year " + Math.round(xv) + " after launch" : "Year " + Math.round(xv)));
-        var rows = 0;
+        var rows = [];
         series.forEach(function (s) {
           var v = valueAt(s, xv);
-          if (v == null) return;
-          var row = el("div", { class: "tt-row" });
-          var k = el("span", { class: "tt-key" }); k.style.background = "var(--s-" + s.id + ")";
-          row.appendChild(k);
-          row.appendChild(el("b", null, (v.exact ? "" : "≈") + fmtPct(v.pct)));
-          row.appendChild(el("span", null, s.label + (mode === "since" ? " (" + fmtYear(v.year) + ")" : "")));
-          tooltip.appendChild(row); rows++;
+          if (v != null) rows.push({ s: s, v: v });
         });
-        if (!rows) tooltip.appendChild(el("div", null, "No data at this point"));
+        rows.sort(function (a, b) { return b.v.pct - a.v.pct; });
+        rows.forEach(function (r) {
+          var row = el("div", { class: "tt-row" });
+          var k = el("span", { class: "tt-key" }); k.style.background = "var(--s-" + r.s.id + ")";
+          row.appendChild(k);
+          row.appendChild(el("b", null, (r.v.exact ? "" : "≈") + fmtPct(r.v.pct)));
+          row.appendChild(el("span", null, r.s.label + (mode === "since" ? " (" + fmtYear(r.v.year) + ")" : "")));
+          tooltip.appendChild(row);
+        });
+        if (!rows.length) tooltip.appendChild(el("div", null, "No data at this point"));
         var scale = chart.clientWidth / W;
         var left = px * scale + 14;
         if (left + 220 > chart.clientWidth) left = px * scale - 14 - tooltip.offsetWidth;
@@ -449,6 +636,88 @@
         draw();
       });
     });
+    var rt;
+    window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(draw, 120); });
+    draw();
+  }
+
+  // ---------- Pace bar chart ----------
+  function renderPace(data, paces) {
+    var box = document.getElementById("pace");
+    var tip = document.getElementById("pace-tip");
+
+    var ai = paces.filter(function (p) { return p.s.id === AI; })[0];
+    if (ai) {
+      var c = document.getElementById("pace-callout");
+      var others = paces.filter(function (p) { return p.s.id !== AI; });
+      var nearest = others.slice().sort(function (a, b) { return Math.abs(a.rate - ai.rate) - Math.abs(b.rate - ai.rate); })[0];
+      c.textContent = "Generative AI added " + fmtRate(ai.rate) + " points a year at its quickest, between " + fmtWhen(ai.from) + " and " + fmtWhen(ai.to) +
+        (nearest ? ". " + shortName(nearest.s) + " managed " + fmtRate(nearest.rate) + "." : ".") +
+        " Measured this way, AI is spreading at roughly the pace of the last few big technologies, not in a league of its own.";
+    }
+
+    function draw() {
+      var old = box.querySelector("svg");
+      if (old) old.remove();
+      var W = Math.max(300, box.clientWidth);
+      var narrow = W < 520;
+      var labelW = narrow ? 104 : 168, valueW = narrow ? 60 : 96, rowH = 36, barH = 18;
+      var m = { t: 8, b: 30 };
+      var H = m.t + paces.length * rowH + m.b;
+      var max = Math.ceil(Math.max.apply(null, paces.map(function (p) { return p.rate; })) / 2) * 2;
+      var x0 = labelW, iw = W - labelW - valueW;
+      var sx = function (v) { return x0 + Math.max(0, v) / max * iw; };
+
+      var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img",
+        "aria-label": "Bar chart of the fastest yearly gain in US adoption for each technology, in percentage points per year." });
+
+      for (var v = 0; v <= max; v += max > 10 ? 4 : 2) {
+        svg.appendChild(svgEl("line", { x1: sx(v), x2: sx(v), y1: m.t, y2: H - m.b,
+          stroke: v === 0 ? "var(--axis)" : "var(--grid)", "stroke-width": 1 }));
+        var tl = svgEl("text", { x: sx(v), y: H - m.b + 18, "text-anchor": "middle", class: "tick-label" });
+        tl.textContent = String(v); svg.appendChild(tl);
+      }
+      var at = svgEl("text", { x: x0 + iw, y: H - 1, "text-anchor": "end", class: "axis-title" });
+      at.textContent = "points per year →"; svg.appendChild(at);
+
+      paces.forEach(function (p, i) {
+        var hero = p.s.id === AI;
+        var y = m.t + i * rowH + (rowH - barH) / 2;
+        var g = svgEl("g", { class: "bar-row", tabindex: 0,
+          "aria-label": p.s.label + ": " + fmtRate(p.rate) + " points per year, " + fmtWhen(p.from) + " to " + fmtWhen(p.to) });
+        g.appendChild(svgEl("rect", { class: "bar-hit", x: 0, y: m.t + i * rowH, width: W, height: rowH, fill: "transparent", rx: 6 }));
+        var lab = svgEl("text", { x: labelW - 12, y: y + barH / 2 + 5, "text-anchor": "end", class: "bar-label" + (hero ? " hero" : "") });
+        lab.textContent = narrow ? shortName(p.s).replace("Electric power", "Electricity").replace("Telephone", "Phone") : p.s.label;
+        g.appendChild(lab);
+        // Bar: square at the baseline, 4px rounded at the data end
+        var xa = sx(0), xb = sx(p.rate), r = Math.min(4, (xb - xa) / 2);
+        g.appendChild(svgEl("path", { fill: "var(--s-" + p.s.id + ")",
+          d: "M" + xa + "," + y + "H" + (xb - r) + "Q" + xb + "," + y + " " + xb + "," + (y + r) +
+             "V" + (y + barH - r) + "Q" + xb + "," + (y + barH) + " " + (xb - r) + "," + (y + barH) + "H" + xa + "Z" }));
+        var val = svgEl("text", { x: xb + 8, y: y + barH / 2 + 5, class: "bar-value" + (hero ? " hero" : "") });
+        val.textContent = fmtRate(p.rate) + (narrow ? "" : " a year");
+        g.appendChild(val);
+
+        function show() {
+          tip.textContent = "";
+          tip.appendChild(el("div", { class: "tt-head" }, p.s.label));
+          tip.appendChild(el("div", null, "From " + fmtPct(p.a) + " to " + fmtPct(p.b)));
+          tip.appendChild(el("div", null, fmtWhen(p.from) + " to " + fmtWhen(p.to)));
+          var scale = box.clientWidth / W;
+          // Below the bar, so it never covers the value label
+          tip.style.left = Math.max(0, Math.min(xa * scale, box.clientWidth - tip.offsetWidth)) + "px";
+          tip.style.top = ((y + barH + 6) * scale) + "px";
+          tip.classList.add("on");
+        }
+        function hide() { tip.classList.remove("on"); }
+        g.addEventListener("pointerenter", show);
+        g.addEventListener("pointerleave", hide);
+        g.addEventListener("focus", show);
+        g.addEventListener("blur", hide);
+        svg.appendChild(g);
+      });
+      box.insertBefore(svg, tip);
+    }
     var rt;
     window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(draw, 120); });
     draw();
